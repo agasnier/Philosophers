@@ -11,10 +11,9 @@ INC_MANDA_DIR = include/mandatory
 INC_BONUS_DIR = include/bonus
 
 SRCS =	$(MANDA_DIR)/main.c \
+		$(MANDA_DIR)/utils.c
 
 SRCS_BONUS =	
-
-HEADER =	
 
 OBJS = $(SRCS:$(MANDA_DIR)/%.c=$(OBJ_DIR)/%.o)
 OBJS_BONUS = $(SRCS_BONUS:$(BONUS_DIR)/%.c=$(OBJ_DIR)/%.o)
