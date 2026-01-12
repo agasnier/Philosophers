@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/12 15:50:46 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:51:24 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 
 # include <unistd.h>
+# include <stdlib.h>
 
 typedef struct	s_philo
 {
