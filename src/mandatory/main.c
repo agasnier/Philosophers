@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/12 15:50:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:33:30 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int	create_tab_philo(t_param *param)
 		return (1);
 		
 	return (0);	
+}
+
+long	get_time(void)
+{
+	struct timeval tv;
+		
+	if (gettimeofday(&tv, NULL) == -1)
+		return (-1);
+			
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 int	main(int argc, char *argv[])
@@ -39,6 +49,10 @@ int	main(int argc, char *argv[])
 		printf("Error create tab_philos\n");
 		return (1);
 	}
+
+	param.time_start = get_time();
+
+	printf("%ld", param.time_start);
 	
 	return (0);
 }
