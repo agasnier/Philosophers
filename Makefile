@@ -11,7 +11,8 @@ INC_MANDA_DIR = include/mandatory
 INC_BONUS_DIR = include/bonus
 
 SRCS =	$(MANDA_DIR)/main.c \
-		$(MANDA_DIR)/utils.c
+		$(MANDA_DIR)/utils.c \
+		$(MANDA_DIR)/init.c
 
 SRCS_BONUS =	
 
