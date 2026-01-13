@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 12:26:35 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 13:49:10 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct	s_param
 
 typedef struct	s_philo
 {
-	pthread_t				id;
+	pthread_t		thread_id;
+	int				id;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
 	long			last_eat;
@@ -51,7 +52,7 @@ int	ft_mini_atoi(const char *argv);
 
 //init.c
 int	create_tab_mutex(t_param *param);
-int	create_tab_philo(t_param *param, t_philo *tab_philos);
+int	create_tab_philo(t_param *param, t_philo **tab_philos);
 int	init_struct(t_param *param, char *argv[]);
 
 #endif
