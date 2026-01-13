@@ -6,28 +6,29 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 12:01:16 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 12:26:37 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_tab_philo(t_param *param)
+int	create_tab_philo(t_param *param, t_philo *tab_philos)
 {
 	int	i;
 	
-	param->tab_philos = malloc(sizeof(t_philo) * param->number_philo);
-	if (!param->tab_philos)
+	tab_philos = malloc(sizeof(t_philo) * param->number_philo);
+	if (!tab_philos)
 		return (1);
 	
 	i = 0;
 	while (i < param->number_philo)
 	{
-		param->tab_philos[i].id = i + 1;
-		param->tab_philos[i].fork_left = &param->mutex_forks[i];
-		param->tab_philos[i].fork_right = &param->mutex_forks[(i + 1) % param->number_philo];
-		param->tab_philos[i].last_eat = 0;
-		param->tab_philos[i].meal_eaten = 0;
+		tab_philos[i].id = i + 1;
+		tab_philos[i].fork_left = &param->mutex_forks[i];
+		tab_philos[i].fork_right = &param->mutex_forks[(i + 1) % param->number_philo];
+		tab_philos[i].last_eat = 0;
+		tab_philos[i].meal_eaten = 0;
+		tab_philos[i].param = param;
 		i++;
 	}
 	
@@ -75,6 +76,10 @@ int	init_struct(t_param *param, char *argv[])
 		param->number_must_eat = 0;
 
 	param->time_start = get_time();
+	param->dead = 0;
+
+	if (pthread_mutex_init(&param->dead_lock, NULL) != 0)
+			return (1);
 
 	printf("Param: %ld ", param->number_philo);
 	printf("%ld ", param->time_to_die);

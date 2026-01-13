@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 12:01:07 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 12:26:35 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef struct	s_philo
-{
-	pthread_t				id;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t *fork_right;
-	long			last_eat;
-	int				meal_eaten;
-	
-}	t_philo;
-
 typedef struct	s_param
 {
 	long			number_philo;
@@ -38,11 +28,22 @@ typedef struct	s_param
 	long			time_to_sleep;
 	long			number_must_eat;
 	long			time_start;
-	t_philo			*tab_philos;
 	pthread_mutex_t	*mutex_forks;
 	int				dead;
+	pthread_mutex_t	dead_lock;
 	
 }	t_param;
+
+typedef struct	s_philo
+{
+	pthread_t				id;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t *fork_right;
+	long			last_eat;
+	int				meal_eaten;
+	t_param			*param;
+	
+}	t_philo;
 
 //utils.c
 long	get_time(void);
@@ -50,7 +51,7 @@ int	ft_mini_atoi(const char *argv);
 
 //init.c
 int	create_tab_mutex(t_param *param);
-int	create_tab_philo(t_param *param);
+int	create_tab_philo(t_param *param, t_philo *tab_philos);
 int	init_struct(t_param *param, char *argv[]);
 
 #endif
