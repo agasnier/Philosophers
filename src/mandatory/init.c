@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 11:29:55 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 12:01:16 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	create_tab_philo(t_param *param)
 		param->tab_philos[i].fork_left = &param->mutex_forks[i];
 		param->tab_philos[i].fork_right = &param->mutex_forks[(i + 1) % param->number_philo];
 		param->tab_philos[i].last_eat = 0;
+		param->tab_philos[i].meal_eaten = 0;
 		i++;
 	}
 	
