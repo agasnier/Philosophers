@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 13:49:10 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:10:30 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ typedef struct	s_param
 	long			number_must_eat;
 	long			time_start;
 	pthread_mutex_t	*mutex_forks;
-	int				dead;
 	pthread_mutex_t	dead_lock;
+	int				dead;
+	pthread_mutex_t	write_lock;
 	
 }	t_param;
 

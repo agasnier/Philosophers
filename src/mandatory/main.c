@@ -6,26 +6,34 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 13:48:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:28:49 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	eat(t_philo *philo)
-// {
-	
-// }
+void	ft_eat(t_philo *philo)
+{
+	long	time;
 
-// void	sleep(t_philo *philo)
-// {
-	
-// }
+	pthread_mutex_lock(philo->fork_left);
+	pthread_mutex_lock(philo->fork_right);
+	time = get_time();
+	printf("%ld %i %s \n", time, philo->id, "eating");
+	usleep(philo->param->time_to_eat * 1000); //faire une fonction plus precise ?
+	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->fork_right);
+}
 
-// void	think(t_philo *philo)
-// {
-	
-// }
+void	ft_sleep(t_philo *philo)
+{
+	(void)philo;
+}
+
+void	ft_think(t_philo *philo)
+{
+	(void)philo;
+}
 
 void *routine(void *arg)
 {
@@ -38,9 +46,9 @@ void *routine(void *arg)
 	{
 		
 
-		eat();
-		sleep();
-		think();
+		ft_eat(philo);
+		ft_sleep(philo);
+		ft_think(philo);
 
 		
 		
@@ -72,13 +80,26 @@ int create_threads(t_param *param, t_philo *tab_philos)
 	return (0);
 }
 
+int	join_threads(t_param *param, t_philo *tab_philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < param->number_philo)
+	{
+		if (pthread_join(tab_philos[i].thread_id, NULL) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	main(int argc, char *argv[])
 {
 	t_philo	*tab_philos;
 	t_param	param;
 	
-	if (argc < 5 || argc > 6)
+	if (argc < 5 || argc > 6) //gerer si moins de un philo
 		return (1);
 
 	if (init_struct(&param, argv))
@@ -104,6 +125,8 @@ int	main(int argc, char *argv[])
 		printf("Error create theads\n");
 		return (1);
 	}
+	
+	join_threads(&param, tab_philos);
 	
 	return (0);
 }
