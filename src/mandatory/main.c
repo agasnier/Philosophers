@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 12:16:03 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:22:27 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	ft_eat(t_philo *philo)
 	
 	mutex_printf(philo, time, "eating");
 	usleep(philo->param->time_to_eat * 1000); //faire une fonction plus precise ?
+	
 	philo->last_eat = time;
+	philo->meal_eaten++;
 	
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
