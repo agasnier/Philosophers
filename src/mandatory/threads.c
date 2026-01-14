@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 14:11:59 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:37:25 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	monitor(t_param *param, t_philo *tab_philos)
 		{
 			pthread_mutex_lock(&param->dead_lock);
 			between_meal = get_time() - tab_philos[i].last_eat;
-			pthread_mutex_lock(&param->dead_lock);
+			pthread_mutex_unlock(&param->dead_lock);
 
 			if (between_meal > param->time_to_die)
 			{
 				mutex_printf(&tab_philos[i], get_time(), "dead");
 				pthread_mutex_lock(&param->dead_lock);
 				param->dead = 1;
-				pthread_mutex_lock(&param->dead_lock);
+				pthread_mutex_unlock(&param->dead_lock);
 				return ;
 			}
 			i++;

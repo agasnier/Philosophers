@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 11:55:33 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:33:23 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 		(*tab_philos)[i].id = i + 1;
 		(*tab_philos)[i].fork_left = &param->mutex_forks[i];
 		(*tab_philos)[i].fork_right = &param->mutex_forks[(i + 1) % param->number_philo];
-		(*tab_philos)[i].last_eat = 0;
+		(*tab_philos)[i].last_eat = param->time_start;
 		(*tab_philos)[i].meal_eaten = 0;
 		(*tab_philos)[i].param = param;
 		i++;
@@ -80,16 +80,5 @@ int	init_struct(t_param *param, char *argv[])
 
 	param->time_start = get_time();
 	param->dead = 0;
-
-	if (pthread_mutex_init(&param->dead_lock, NULL) != 0)
-			return (1);
-
-	printf("Param: %ld ", param->number_philo);
-	printf("%ld ", param->time_to_die);
-	printf("%ld ", param->time_to_eat);
-	printf("%ld ", param->time_to_sleep);
-	if (param->number_must_eat)
-		printf("%ld\n", param->number_must_eat);
-
 	return (0);
 }
