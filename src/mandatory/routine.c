@@ -6,30 +6,16 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 16:44:01 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 17:40:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	mutex_printf(t_philo *philo, long time, char *msg)
-{
-	pthread_mutex_lock(&philo->param->dead_lock);
-	if (philo->param->dead == 0)
-	{
-		pthread_mutex_lock(&philo->param->write_lock);
-		printf("%ld %i %s \n", time, philo->id, msg);
-		pthread_mutex_unlock(&philo->param->write_lock);
-	}
-	pthread_mutex_unlock(&philo->param->dead_lock);
-}
-
 static int	ft_eat(t_philo *philo)
 {
 	long	time;
 
-	if (philo->id % 2 == 0)
-		usleep(1000);
 	pthread_mutex_lock(philo->fork_left);
 	mutex_printf(philo, get_time(), "taken a fork");
 	pthread_mutex_lock(philo->fork_right);

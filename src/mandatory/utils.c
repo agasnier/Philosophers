@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:13:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 16:42:43 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 17:57:57 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,21 @@ int	is_dead_timer(t_philo *philo, long sleep)
 		pthread_mutex_unlock(&philo->param->dead_lock);
 		if ((get_time() - time_start) >= sleep)
 			break ;
-		usleep(500);
+		usleep(250);
 	}
 	return (0);
+}
+
+void	mutex_printf(t_philo *philo, long time, char *msg)
+{
+	pthread_mutex_lock(&philo->param->dead_lock);
+	if (philo->param->dead == 0)
+	{
+		pthread_mutex_lock(&philo->param->write_lock);
+		printf("%ld %i %s \n", time, philo->id, msg);
+		pthread_mutex_unlock(&philo->param->write_lock);
+	}
+	pthread_mutex_unlock(&philo->param->dead_lock);
 }
 
 long	get_time(void)
