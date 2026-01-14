@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 12:32:36 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:12:13 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ft_think(t_philo *philo);
 void	*routine(void *arg);
 
 //threads.c
+void	monitor(t_param *param, t_philo *tab_philos);
 int	create_threads(t_param *param, t_philo *tab_philos);
 int	join_threads(t_param *param, t_philo *tab_philos);
 

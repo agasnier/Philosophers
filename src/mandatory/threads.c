@@ -6,11 +6,39 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 12:30:58 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:11:59 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+///faire la gestion des morts en while (1) ++ stoper si mort
+void	monitor(t_param *param, t_philo *tab_philos)
+{
+	int		i;
+	long	between_meal;
+
+	while (1)
+	{
+		i = 0;
+		while (i < param->number_philo)
+		{
+			pthread_mutex_lock(&param->dead_lock);
+			between_meal = get_time() - tab_philos[i].last_eat;
+			pthread_mutex_lock(&param->dead_lock);
+
+			if (between_meal > param->time_to_die)
+			{
+				mutex_printf(&tab_philos[i], get_time(), "dead");
+				pthread_mutex_lock(&param->dead_lock);
+				param->dead = 1;
+				pthread_mutex_lock(&param->dead_lock);
+				return ;
+			}
+			i++;
+		}
+	}
+}
 
 int create_threads(t_param *param, t_philo *tab_philos)
 {

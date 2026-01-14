@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 12:31:03 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:49:24 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	
+	monitor(&param, tab_philos);
+
 	join_threads(&param, tab_philos);
 	
 	return (0);
