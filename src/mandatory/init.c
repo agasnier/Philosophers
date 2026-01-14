@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 13:50:30 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:55:33 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 	
 	return (0);	
 }
-int	create_tab_mutex(t_param *param)
+int	create_mutex(t_param *param)
 {
 	int	i;
 	
@@ -49,7 +49,10 @@ int	create_tab_mutex(t_param *param)
 			return (1);
 		i++;
 	}
-		
+	if (pthread_mutex_init(&param->dead_lock, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&param->write_lock, NULL) != 0)
+		return (1);
 	return (0);	
 }
 int	init_struct(t_param *param, char *argv[])
