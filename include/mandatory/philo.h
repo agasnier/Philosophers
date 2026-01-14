@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 14:12:13 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:50:39 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 # define PHILO_H
 
 # include <stdio.h>
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef struct	s_param
+typedef struct s_param
 {
 	long			number_philo;
 	long			time_to_die;
@@ -32,42 +31,38 @@ typedef struct	s_param
 	pthread_mutex_t	dead_lock;
 	int				dead;
 	pthread_mutex_t	write_lock;
-	
 }	t_param;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	pthread_t		thread_id;
 	int				id;
 	pthread_mutex_t	*fork_left;
-	pthread_mutex_t *fork_right;
+	pthread_mutex_t	*fork_right;
 	long			last_eat;
 	int				meal_eaten;
 	t_param			*param;
-	
 }	t_philo;
 
 //utils.c
+int		is_dead_timer(t_philo *philo, long sleep);
 long	get_time(void);
-int	ft_mini_atoi(const char *argv);
+int		ft_mini_atoi(const char *argv);
 
 //init.c
-int	create_mutex(t_param *param);
-int	create_tab_philo(t_param *param, t_philo **tab_philos);
-int	init_struct(t_param *param, char *argv[]);
+void	free_mutex(pthread_mutex_t *mutex_forks, int i,
+			pthread_mutex_t *dead_lock, pthread_mutex_t *write_lock);
+int		create_mutex(t_param *param);
+int		create_tab_philo(t_param *param, t_philo **tab_philos);
+int		init_struct(t_param *param, char *argv[]);
 
 //routine.c
 void	mutex_printf(t_philo *philo, long time, char *msg);
-void	ft_eat(t_philo *philo);
-void	ft_sleep(t_philo *philo);
-void	ft_think(t_philo *philo);
 void	*routine(void *arg);
 
 //threads.c
 void	monitor(t_param *param, t_philo *tab_philos);
-int	create_threads(t_param *param, t_philo *tab_philos);
-int	join_threads(t_param *param, t_philo *tab_philos);
-
-
+int		create_threads(t_param *param, t_philo *tab_philos);
+int		join_threads(t_param *param, t_philo *tab_philos);
 
 #endif

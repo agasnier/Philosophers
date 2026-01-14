@@ -6,19 +6,39 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:13:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/13 09:53:54 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:42:43 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	is_dead_timer(t_philo *philo, long sleep)
+{
+	long	time_start;
+
+	time_start = get_time();
+	while (1)
+	{
+		pthread_mutex_lock(&philo->param->dead_lock);
+		if (philo->param->dead == 1)
+		{
+			pthread_mutex_unlock(&philo->param->dead_lock);
+			return (1);
+		}
+		pthread_mutex_unlock(&philo->param->dead_lock);
+		if ((get_time() - time_start) >= sleep)
+			break ;
+		usleep(500);
+	}
+	return (0);
+}
+
 long	get_time(void)
 {
-	struct timeval tv;
-		
+	struct timeval	tv;
+
 	if (gettimeofday(&tv, NULL) == -1)
 		return (-1);
-			
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
