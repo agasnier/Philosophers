@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 12:13:06 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:32:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,18 @@ int	ft_mini_atoi(const char *argv);
 int	create_mutex(t_param *param);
 int	create_tab_philo(t_param *param, t_philo **tab_philos);
 int	init_struct(t_param *param, char *argv[]);
+
+//routine.c
+void	mutex_printf(t_philo *philo, long time, char *msg);
+void	ft_eat(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+void	ft_think(t_philo *philo);
+void	*routine(void *arg);
+
+//threads.c
+int	create_threads(t_param *param, t_philo *tab_philos);
+int	join_threads(t_param *param, t_philo *tab_philos);
+
+
 
 #endif

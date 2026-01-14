@@ -12,7 +12,9 @@ INC_BONUS_DIR = include/bonus
 
 SRCS =	$(MANDA_DIR)/main.c \
 		$(MANDA_DIR)/utils.c \
-		$(MANDA_DIR)/init.c
+		$(MANDA_DIR)/init.c \
+		$(MANDA_DIR)/routine.c \
+		$(MANDA_DIR)/threads.c
 
 SRCS_BONUS =	
 
