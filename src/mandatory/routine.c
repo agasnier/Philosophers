@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 14:39:37 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:42:37 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void *routine(void *arg)
 
 		pthread_mutex_lock(&philo->param->dead_lock);
 		if (philo->param->dead == 1)
+		{
+			pthread_mutex_unlock(&philo->param->dead_lock);
 			return (NULL);
+		}
 		pthread_mutex_unlock(&philo->param->dead_lock);
 		
 	}
