@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:00:23 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:29:43 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	*routine(void *arg)
 	while (1)
 	{
 		if (ft_eat(philo))
+			return (NULL);
+		if (philo->meal_eaten == philo->param->number_must_eat)
 			return (NULL);
 		if (ft_sleep(philo))
 			return (NULL);

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 10:40:54 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:37:46 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ void	monitor(t_param *param, t_philo *tab_philos)
 {
 	int		i;
 	long	between_meal;
+	int		all_eaten;
 
 	while (1)
 	{
 		i = 0;
+		all_eaten = 0;
 		while (i < param->number_philo)
 		{
+			if (tab_philos[i].meal_eaten == param->number_must_eat)
+				all_eaten++;
 			pthread_mutex_lock(&param->dead_lock);
 			between_meal = get_time() - tab_philos[i].last_eat;
 			pthread_mutex_unlock(&param->dead_lock);
-			if (between_meal > param->time_to_die)
+			
+			if (between_meal > param->time_to_die && tab_philos[i].meal_eaten < param->number_must_eat)
 			{
 				mutex_printf(&tab_philos[i], get_time(), "dead");
 				pthread_mutex_lock(&param->dead_lock);
@@ -35,7 +40,9 @@ void	monitor(t_param *param, t_philo *tab_philos)
 			}
 			i++;
 		}
-		usleep(500);
+		if (all_eaten == param->number_philo)
+			return ;
+		usleep(10);
 	}
 }
 
