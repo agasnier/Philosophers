@@ -1,8 +1,7 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g 
-C = -fsanitize=thread
+CFLAGS = -Werror -Wall -Wextra -g -fsanitize=thread
 
 MANDA_DIR = src/mandatory
 BONUS_DIR = src/bonus

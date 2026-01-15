@@ -6,20 +6,35 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 14:09:19 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:32:56 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void ft_eat_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 1)
+	{
+		pthread_mutex_lock(philo->fork_right);
+		mutex_printf(philo, get_time(), "taken a fork");
+		pthread_mutex_lock(philo->fork_left);
+		mutex_printf(philo, get_time(), "taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->fork_left);
+		mutex_printf(philo, get_time(), "taken a fork");
+		pthread_mutex_lock(philo->fork_right);
+		mutex_printf(philo, get_time(), "taken a fork");
+	}
+}
+
 static int	ft_eat(t_philo *philo)
 {
 	long	time;
 
-	pthread_mutex_lock(philo->fork_left);
-	mutex_printf(philo, get_time(), "taken a fork");
-	pthread_mutex_lock(philo->fork_right);
-	mutex_printf(philo, get_time(), "taken a fork");
+	ft_eat_forks(philo);
 	time = get_time();
 	pthread_mutex_lock(&philo->param->dead_lock);
 	philo->last_eat = time;
