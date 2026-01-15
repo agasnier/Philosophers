@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:13:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:22:14 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:18:00 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_mini_atoi(const char *argv)
+long	ft_mini_atoi(const char *argv)
 {
 	int	nbr;
 	int	i;

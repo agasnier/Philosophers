@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 17:32:23 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:16:56 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo
 //utils.c
 int		is_dead_timer(t_philo *philo, long sleep);
 long	get_time(void);
-int		ft_mini_atoi(const char *argv);
+long	ft_mini_atoi(const char *argv);
 
 //init.c
 void	free_mutex(pthread_mutex_t *mutex_forks, int i,
