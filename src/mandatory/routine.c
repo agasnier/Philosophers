@@ -6,15 +6,15 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 14:32:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:10:01 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void ft_eat_forks(t_philo *philo)
+static void	ft_eat_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 1)
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->fork_right);
 		mutex_printf(philo, get_time(), "taken a fork");
@@ -46,7 +46,9 @@ static int	ft_eat(t_philo *philo)
 		pthread_mutex_unlock(philo->fork_right);
 		return (1);
 	}
+	pthread_mutex_lock(&philo->param->dead_lock);
 	philo->meal_eaten++;
+	pthread_mutex_unlock(&philo->param->dead_lock);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 	return (0);
@@ -69,8 +71,6 @@ static int	ft_think(t_philo *philo)
 
 	time = get_time();
 	mutex_printf(philo, time, "thinking");
-	if (is_dead_timer(philo, 0))
-		return (1);
 	return (0);
 }
 

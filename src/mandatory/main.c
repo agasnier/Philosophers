@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 14:18:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:06:33 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	if (argc < 5 || argc > 6)
 		return (1);
 
-	if (argv[1][0] == '1')
+	if (argv[1][0] == '1' && !argv[1][1])
 	{
 		one_philo(argv[2]);
 		return (0);
