@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:46:24 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:54:50 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		is_dead_timer(philo, 100);
+		is_dead_timer(philo, philo->param->time_to_eat / 2);
 	while (1)
 	{
 		if (ft_eat(philo))

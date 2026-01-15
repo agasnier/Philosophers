@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:51:34 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:53:35 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	init_struct(t_param *param, char *argv[])
 			return (1);
 	}
 	else
-		param->number_must_eat = 0;
+		param->number_must_eat = -1;
 	param->time_start = get_time();
 	param->dead = 0;
 	return (0);
