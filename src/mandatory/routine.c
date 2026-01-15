@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:54:50 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:28:30 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static int	ft_eat(t_philo *philo)
 
 	pthread_mutex_lock(philo->fork_left);
 	mutex_printf(philo, get_time(), "taken a fork");
-	if (philo->param->number_philo == 1 && is_dead_timer(philo, philo->param->time_to_die * 1.1))
+	if (philo->param->number_philo == 1)
+	{
+		is_dead_timer(philo, philo->param->time_to_die * 1.1);
+		pthread_mutex_unlock(philo->fork_left);
 		return (1);
+	}
 	pthread_mutex_lock(philo->fork_right);
 	mutex_printf(philo, get_time(), "taken a fork");
 	time = get_time();

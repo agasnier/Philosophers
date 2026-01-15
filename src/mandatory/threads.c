@@ -6,11 +6,14 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 12:37:46 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:15:11 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+
+
 
 void	monitor(t_param *param, t_philo *tab_philos)
 {
