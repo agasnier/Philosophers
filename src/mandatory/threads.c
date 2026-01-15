@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 16:45:07 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 10:40:54 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	monitor(t_param *param, t_philo *tab_philos)
 			}
 			i++;
 		}
+		usleep(500);
 	}
 }
 

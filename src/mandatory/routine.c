@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 17:40:36 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:00:23 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static int	ft_sleep(t_philo *philo)
 	long	time;
 
 	time = get_time();
-	pthread_mutex_lock(&philo->param->write_lock);
-	printf("%ld %i %s \n", time, philo->id, "sleeping");
-	pthread_mutex_unlock(&philo->param->write_lock);
+	mutex_printf(philo, time, "sleeping");
 	if (is_dead_timer(philo, philo->param->time_to_sleep))
 		return (1);
 	return (0);
@@ -55,10 +53,8 @@ static int	ft_think(t_philo *philo)
 	long	time;
 
 	time = get_time();
-	pthread_mutex_lock(&philo->param->write_lock);
-	printf("%ld %i %s \n", time, philo->id, "thinking");
-	pthread_mutex_unlock(&philo->param->write_lock);
-	if (is_dead_timer(philo, philo->param->time_to_sleep))
+	mutex_printf(philo, time, "thinking");
+	if (is_dead_timer(philo, 0))
 		return (1);
 	return (0);
 }
@@ -68,6 +64,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		is_dead_timer(philo, 100);
 	while (1)
 	{
 		if (ft_eat(philo))
