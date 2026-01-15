@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/14 17:42:16 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:51:34 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	init_struct(t_param *param, char *argv[])
 	if (param->time_to_die == -1)
 		return (1);
 	param->time_to_eat = ft_mini_atoi(argv[3]);
-	if (param->time_to_die == -1)
+	if (param->time_to_eat == -1)
 		return (1);
 	param->time_to_sleep = ft_mini_atoi(argv[4]);
 	if (param->time_to_sleep == -1)
