@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 11:50:16 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:10:08 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	monitor(t_param *param, t_philo *tab_philos)
 			pthread_mutex_lock(&param->dead_lock);
 			if (is_dead(&tab_philos[i]))
 			{
-				mutex_printf(&tab_philos[i], get_time(), "dead", 0);
+				mutex_printf(&tab_philos[i], get_time(), "died", 0);
 				param->dead = 1;
 				pthread_mutex_unlock(&param->dead_lock);
 				return ;
