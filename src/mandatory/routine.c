@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 14:32:52 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:43:40 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static int	ft_think(t_philo *philo)
 
 	time = get_time();
 	mutex_printf(philo, time, "thinking", 1);
-	if (philo->id % 2 == 0)
-		usleep(100);
+	// if (philo->id % 2 == 0)
+	// 	usleep(100);
 	return (0);
 }
 
@@ -90,10 +90,10 @@ void	*routine(void *arg)
 		pthread_mutex_lock(&philo->meal_lock);
 		if (philo->meal_eaten == philo->param->number_must_eat)
 		{
-			pthread_mutex_lock(&philo->meal_lock);
+			pthread_mutex_unlock(&philo->meal_lock);
 			return (NULL);
 		}
-		pthread_mutex_lock(&philo->meal_lock);
+		pthread_mutex_unlock(&philo->meal_lock);
 		if (ft_sleep(philo))
 			return (NULL);
 		if (ft_think(philo))
