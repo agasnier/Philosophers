@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 14:43:40 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:16:14 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,18 @@ static int	ft_sleep(t_philo *philo)
 static int	ft_think(t_philo *philo)
 {
 	long	time;
+	long	time_to_think;
 
 	time = get_time();
 	mutex_printf(philo, time, "thinking", 1);
-	// if (philo->id % 2 == 0)
-	// 	usleep(100);
+	time_to_think = (philo->param->time_to_eat * 2) - philo->param->time_to_sleep;
+	if (philo->id % 2 == 1)
+	{
+		if (time_to_think < 0)
+			usleep(0);
+		else
+			usleep(time_to_think * 100);
+	}	 	
 	return (0);
 }
 
@@ -82,7 +89,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(1500);
 	while (1)
 	{
 		if (ft_eat(philo))

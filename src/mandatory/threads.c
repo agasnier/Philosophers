@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 14:47:22 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:57:32 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	monitor(t_param *param, t_philo *tab_philos)
 		}
 		if (param->number_must_eat != -1 && all_eaten == param->number_philo)
 			return ;
-		usleep(100);
+		usleep(1000);
 	}
 }
 
