@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:08:33 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 11:48:37 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:26:45 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	long			last_eat;
 	int				meal_eaten;
+	pthread_mutex_t	meal_lock;
 	t_param			*param;
 }	t_philo;
 

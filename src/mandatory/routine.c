@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 11:49:25 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:32:52 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	ft_eat(t_philo *philo)
 
 	ft_eat_forks(philo);
 	time = get_time();
-	pthread_mutex_lock(&philo->param->dead_lock);
+	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_eat = time;
-	pthread_mutex_unlock(&philo->param->dead_lock);
+	pthread_mutex_unlock(&philo->meal_lock);
 	mutex_printf(philo, time, "eating", 1);
 	if (is_dead_timer(philo, philo->param->time_to_eat))
 	{
@@ -46,9 +46,9 @@ static int	ft_eat(t_philo *philo)
 		pthread_mutex_unlock(philo->fork_right);
 		return (1);
 	}
-	pthread_mutex_lock(&philo->param->dead_lock);
+	pthread_mutex_lock(&philo->meal_lock);
 	philo->meal_eaten++;
-	pthread_mutex_unlock(&philo->param->dead_lock);
+	pthread_mutex_unlock(&philo->meal_lock);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 	return (0);
@@ -71,6 +71,8 @@ static int	ft_think(t_philo *philo)
 
 	time = get_time();
 	mutex_printf(philo, time, "thinking", 1);
+	if (philo->id % 2 == 0)
+		usleep(100);
 	return (0);
 }
 
@@ -80,13 +82,18 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		is_dead_timer(philo, philo->param->time_to_eat / 2);
+		usleep(100);
 	while (1)
 	{
 		if (ft_eat(philo))
 			return (NULL);
+		pthread_mutex_lock(&philo->meal_lock);
 		if (philo->meal_eaten == philo->param->number_must_eat)
+		{
+			pthread_mutex_lock(&philo->meal_lock);
 			return (NULL);
+		}
+		pthread_mutex_lock(&philo->meal_lock);
 		if (ft_sleep(philo))
 			return (NULL);
 		if (ft_think(philo))

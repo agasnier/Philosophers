@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:13:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 11:48:53 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:24:27 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_dead_timer(t_philo *philo, long sleep)
 		pthread_mutex_unlock(&philo->param->dead_lock);
 		if ((get_time() - time_start) >= sleep)
 			break ;
-		usleep(500);
+		usleep(10);
 	}
 	return (0);
 }

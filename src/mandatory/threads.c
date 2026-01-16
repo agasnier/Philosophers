@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 12:10:08 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:35:52 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ void	monitor(t_param *param, t_philo *tab_philos)
 				pthread_mutex_unlock(&param->dead_lock);
 				return ;
 			}
+
+			pthread_mutex_unlock(&param->dead_lock);
+			pthread_mutex_lock(&tab_philos[i].meal_lock);
 			if (param->number_must_eat != -1 && tab_philos[i].meal_eaten >= param->number_must_eat)
 				all_eaten++;
-			pthread_mutex_unlock(&param->dead_lock);
+			pthread_mutex_unlock(&tab_philos[i].meal_lock);
 		}
 		if (param->number_must_eat != -1 && all_eaten == param->number_philo)
 			return ;
-		usleep(500);
+		usleep(5000);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 11:33:55 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:36:58 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 			% param->number_philo];
 		(*tab_philos)[i].last_eat = param->time_start;
 		(*tab_philos)[i].meal_eaten = 0;
+		if (pthread_mutex_init(&(*tab_philos)[i].meal_lock, NULL) != 0)
+		{
+			return (1); ///destroy mutex	
+		}
 		(*tab_philos)[i].param = param;
 		i++;
 	}
