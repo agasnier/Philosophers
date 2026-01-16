@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 15:06:33 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:12:21 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	one_philo(char *time_to_die)
 {
 	printf("%06ldms %4i %15s \n", ft_mini_atoi("0"), 1, "taken a fork");
 	usleep(ft_mini_atoi(time_to_die) * 1000);
-	printf("%06ldms %4i %15s \n", ft_mini_atoi(time_to_die), 1, "dead");
+	printf("%06ldms %4i %15s \n", ft_mini_atoi(time_to_die), 1, "died");
 }
 
 int	main(int argc, char *argv[])
