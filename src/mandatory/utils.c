@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:13:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 14:57:29 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:42:00 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	mutex_printf(t_philo *philo, long time, char *msg, int dead_lock)
 	if (philo->param->dead == 0)
 	{
 		pthread_mutex_lock(&philo->param->write_lock);
-		printf("%06ldms %4i %15s \n", time, philo->id, msg);
+		printf("%ld %i %s\n", time, philo->id, msg);
 		pthread_mutex_unlock(&philo->param->write_lock);
 	}
 	if (dead_lock)

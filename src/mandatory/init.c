@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 14:36:58 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:41:03 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 		(*tab_philos)[i].fork_left = &param->mutex_forks[i];
 		(*tab_philos)[i].fork_right = &param->mutex_forks[(i + 1)
 			% param->number_philo];
-		(*tab_philos)[i].last_eat = param->time_start;
+		(*tab_philos)[i].last_eat = 0;
 		(*tab_philos)[i].meal_eaten = 0;
 		if (pthread_mutex_init(&(*tab_philos)[i].meal_lock, NULL) != 0)
 		{
@@ -104,7 +104,6 @@ int	init_struct(t_param *param, char *argv[])
 	}
 	else
 		param->number_must_eat = -1;
-	param->time_start = get_time();
 	param->dead = 0;
 	return (0);
 }
