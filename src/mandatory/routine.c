@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:29:47 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/15 15:10:01 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:49:25 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static void	ft_eat_forks(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->fork_right);
-		mutex_printf(philo, get_time(), "taken a fork");
+		mutex_printf(philo, get_time(), "taken a fork", 1);
 		pthread_mutex_lock(philo->fork_left);
-		mutex_printf(philo, get_time(), "taken a fork");
+		mutex_printf(philo, get_time(), "taken a fork", 1);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->fork_left);
-		mutex_printf(philo, get_time(), "taken a fork");
+		mutex_printf(philo, get_time(), "taken a fork", 1);
 		pthread_mutex_lock(philo->fork_right);
-		mutex_printf(philo, get_time(), "taken a fork");
+		mutex_printf(philo, get_time(), "taken a fork", 1);
 	}
 }
 
@@ -39,7 +39,7 @@ static int	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->param->dead_lock);
 	philo->last_eat = time;
 	pthread_mutex_unlock(&philo->param->dead_lock);
-	mutex_printf(philo, time, "eating");
+	mutex_printf(philo, time, "eating", 1);
 	if (is_dead_timer(philo, philo->param->time_to_eat))
 	{
 		pthread_mutex_unlock(philo->fork_left);
@@ -59,7 +59,7 @@ static int	ft_sleep(t_philo *philo)
 	long	time;
 
 	time = get_time();
-	mutex_printf(philo, time, "sleeping");
+	mutex_printf(philo, time, "sleeping", 1);
 	if (is_dead_timer(philo, philo->param->time_to_sleep))
 		return (1);
 	return (0);
@@ -70,7 +70,7 @@ static int	ft_think(t_philo *philo)
 	long	time;
 
 	time = get_time();
-	mutex_printf(philo, time, "thinking");
+	mutex_printf(philo, time, "thinking", 1);
 	return (0);
 }
 
