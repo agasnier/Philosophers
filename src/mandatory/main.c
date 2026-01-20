@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 17:16:55 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:46:58 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ static int	main_helper(t_param *param, t_philo **tab_philos)
 	if (create_tab_philo(param, tab_philos))
 	{
 		printf("Error create tab_philos\n");
-		// free_mutex(param->mutex_forks, param->number_philo,
-		// 	&param->dead_lock, &param->write_lock);
+		free_mutex_tab(param->mutex_forks, param->number_philo);
+		free_mutex(param, NULL, 0, 3);
 		return (1);
 	}
 	if (create_threads(param, *tab_philos))
 	{
 		printf("Error create theads\n");
-		// free_mutex(param->mutex_forks, param->number_philo,
-		// 	&param->dead_lock, &param->write_lock);
+		free_mutex_tab(param->mutex_forks, param->number_philo);
+		free_mutex(param, tab_philos, param->number_philo, 7);
 		return (1);
 	}
 	monitor(param, *tab_philos);
 	join_threads(param, *tab_philos);
-	// free_mutex(param->mutex_forks, param->number_philo,
-	// 	&param->dead_lock, &param->write_lock);
-	//free(tab_philos);
+	free_mutex_tab(param->mutex_forks, param->number_philo);
+	free_mutex(param, tab_philos, param->number_philo, 7);
+	free(tab_philos);
 	return (0);
 }
 
@@ -55,8 +55,7 @@ int	main(int argc, char *argv[])
 
 	if (argc < 5 || argc > 6)
 	{
-		printf("./philo nb_philo time_to_die time_to_eat \
-			time_to_sleep [nb_meals]\n");
+		printf("./philo nb_philo time_to_die time_to_eat time_to_sleep [nb_meals]\n");
 		return (1);
 	}
 	if (argv[1][0] == '1' && !argv[1][1])
