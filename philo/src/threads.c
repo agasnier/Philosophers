@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:30:38 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/16 17:45:11 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:14:10 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	is_dead(t_philo *philo)
 	return (0);
 }
 
-static void	all_meal_incr(t_param *param, t_philo *tab_philos, int *i, int *all_eaten)
+static void	all_meal_incr(t_param *param, t_philo *tab_philos,
+			int *i, int *all_eaten)
 {
 	pthread_mutex_lock(&tab_philos[*i].meal_lock);
 	if (param->number_must_eat != -1

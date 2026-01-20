@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/20 15:00:04 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:25:00 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	free_mutex_tab(pthread_mutex_t *tab, int i)
 	}
 }
 
-void	free_mutex(t_param *param, t_philo **tab_philo, int number_philo, int mutex_o)
+void	free_mutex(t_param *param, t_philo **tab_philo,
+		int number_philo, int mutex_o)
 {
-
 	if (mutex_o == 1 || mutex_o == 3 || mutex_o == 5 || mutex_o == 7)
 		pthread_mutex_destroy(&param->dead_lock);
 	if (mutex_o == 2 || mutex_o == 3 || mutex_o == 6 || mutex_o == 7)
@@ -36,6 +36,22 @@ void	free_mutex(t_param *param, t_philo **tab_philo, int number_philo, int mutex
 		if (tab_philo)
 			free(*tab_philo);
 	}
+}
+
+static int	create_mutex_helper(t_param *param, int i)
+{
+	if (pthread_mutex_init(&param->dead_lock, NULL) != 0)
+	{
+		free_mutex_tab(param->mutex_forks, i);
+		return (1);
+	}
+	if (pthread_mutex_init(&param->write_lock, NULL) != 0)
+	{
+		free_mutex_tab(param->mutex_forks, i);
+		free_mutex(param, NULL, 0, 1);
+		return (1);
+	}
+	return (0);
 }
 
 int	create_mutex(t_param *param)
@@ -54,17 +70,8 @@ int	create_mutex(t_param *param)
 			return (1);
 		}
 	}
-	if (pthread_mutex_init(&param->dead_lock, NULL) != 0)
-	{
-		free_mutex_tab(param->mutex_forks, i);
+	if (create_mutex_helper(param, i))
 		return (1);
-	}
-	if (pthread_mutex_init(&param->write_lock, NULL) != 0)
-	{
-		free_mutex_tab(param->mutex_forks, i);
-		free_mutex(param, NULL, 0, 1);
-		return (1);
-	}
 	return (0);
 }
 
@@ -92,31 +99,5 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 		(*tab_philos)[i].param = param;
 		i++;
 	}
-	return (0);
-}
-
-int	init_struct(t_param *param, char *argv[])
-{
-	param->number_philo = ft_mini_atoi(argv[1]);
-	if (param->number_philo == -1)
-		return (1);
-	param->time_to_die = ft_mini_atoi(argv[2]);
-	if (param->time_to_die == -1)
-		return (1);
-	param->time_to_eat = ft_mini_atoi(argv[3]);
-	if (param->time_to_eat == -1)
-		return (1);
-	param->time_to_sleep = ft_mini_atoi(argv[4]);
-	if (param->time_to_sleep == -1)
-		return (1);
-	if (argv[5])
-	{
-		param->number_must_eat = ft_mini_atoi(argv[5]);
-		if (param->number_must_eat == -1)
-			return (1);
-	}
-	else
-		param->number_must_eat = -1;
-	param->dead = 0;
 	return (0);
 }
