@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 09:52:58 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/20 14:36:55 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:00:04 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	free_mutex(t_param *param, t_philo **tab_philo, int number_philo, int mutex
 	if (mutex_o == 4 || mutex_o == 5 || mutex_o == 6 || mutex_o == 7)
 	{
 		while (--number_philo >= 0)
-			pthread_mutex_destroy(&tab_philo[number_philo]->meal_lock);
+			pthread_mutex_destroy(&(*tab_philo)[number_philo].meal_lock);
 		if (tab_philo)
-			free(tab_philo);
+			free(*tab_philo);
 	}
 }
 
@@ -86,7 +86,7 @@ int	create_tab_philo(t_param *param, t_philo **tab_philos)
 		(*tab_philos)[i].meal_eaten = 0;
 		if (pthread_mutex_init(&(*tab_philos)[i].meal_lock, NULL) != 0)
 		{
-			free_mutex(param, tab_philos, i, 7);
+			free_mutex(param, tab_philos, i, 4);
 			return (1);
 		}
 		(*tab_philos)[i].param = param;

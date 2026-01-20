@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:04:37 by algasnie          #+#    #+#             */
-/*   Updated: 2026/01/20 14:46:58 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:56:33 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	main_helper(t_param *param, t_philo **tab_philos)
 	join_threads(param, *tab_philos);
 	free_mutex_tab(param->mutex_forks, param->number_philo);
 	free_mutex(param, tab_philos, param->number_philo, 7);
-	free(tab_philos);
 	return (0);
 }
 
